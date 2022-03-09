@@ -136,15 +136,19 @@ return (M1+M2+M3+M4+M5+M6+M7)/(kering+A2+A3+A4+A5+A6+A7);
 }
 
 void setup() {
-  // put your setup code here, to run once:
-
+  Serial.begin(9600);
+  
 }
-float nilai_sensor = 0.0;
-float pwm=0.0;
 void loop() {
-  inputf = nilai_sensor; // 0-90%
-  moment();
-  pwm = deffuzzyfikasi();
-  // put your main code here, to run repeatedly:
-
+  if (Serial.available()) {
+    int a = Serial.parseInt();
+    if (a >= 0) {
+      inputf = a;
+      Serial.print("Input Lembab :"); //0 - 90
+      Serial.print(inputf);
+      Serial.println(" %");
+      Serial.print("Output Deffuzyfikasi Mamdani :");
+      Serial.println(deffuzzyfikasi());
+    }
+  }
 }
